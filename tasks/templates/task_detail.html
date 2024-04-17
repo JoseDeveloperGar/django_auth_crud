@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<main class="container my-3">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form action="" method="POST" class="card card-body text-center">
+                <h1>{{ task.title }}</h1>
+                {{ error }}
+                {% csrf_token %}
+                {{ form.as_table }}
+                <br>
+                <button class="btn btn-dark">
+                    Update
+                </button>
+            </form>
+            <br>
+            <form action="{% url 'task_completed' task.id %}" method="POST" class="card card-body text-center">
+                {% csrf_token %}
+                <button class="btn btn-success">
+                    Completed
+                </button>
+            </form>
+            <br>
+            <form action="{% url 'task_delete' task.id %}" method="POST" class="card card-body text-center">
+                {% csrf_token %}
+                <button class="btn btn-danger">
+                    Delete
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
